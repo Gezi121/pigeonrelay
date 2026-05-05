@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build output
+frontend/dist/
+backend/server
+backend/server.exe
+
+# Data
+data/*.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
+*.log
+__pycache__/
+backend/server_*
+gen_ips.py
+install-xpadding.sh
+tmp_links.json

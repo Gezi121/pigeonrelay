@@ -1,0 +1,8 @@
+# PigeonRelay backend configuration
+db_path: /app/data/nodeforge.db
+jwt_secret: ""
+port: "3214"
+backup_retention_count: 2
+admin_user: admin
+admin_pass: admin123
+notification_webhook: ""

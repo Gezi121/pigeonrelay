@@ -1,0 +1,16 @@
+services:
+  speedtest:
+    build: .
+    container_name: pigeonrelay-speedtest
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      - PIGEONRELAY_URL=https://pigeonrelay.example.com
+      - LATENCY_TOKEN=your-token-here
+      - WORKERS=150
+      - TCP_TIMEOUT=2
+      - TEST_PORT=443
+      - MEASURE_INTERVAL=600
+      - REPORT_INTERVAL=1200
+    volumes:
+      - ./client_id.txt:/app/client_id.txt

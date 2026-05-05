@@ -1,0 +1,20 @@
+services:
+  pigeonrelay:
+    image: ghcr.io/gezi121/pigeonrelay:latest
+    network_mode: host
+    volumes:
+      - ./data/pigeonrelay:/app/data
+      - ./config.yaml:/app/config.yaml:ro
+    environment:
+      - DB_PATH=/app/data/pigeonrelay.db
+      - JWT_SECRET=change-me-in-production
+      - PORT=3214
+      - STATIC_DIR=/app/static
+      - ADMIN_USER=admin
+      - ADMIN_PASS=admin123
+      - BACKUP_RETENTION_COUNT=2
+      - LATENCY_TOKEN=change-me
+      # CF 优选（可选，也可在 Settings 页面配置）
+      # - CF_API_TOKEN=
+      # - CF_ZONE_ID=
+    restart: always
