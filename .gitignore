@@ -28,3 +28,9 @@ backend/server_*
 gen_ips.py
 install-xpadding.sh
 tmp_links.json
+
+# Local dev files
+.claude/
+*.patch
+run.bat
+plan.md
