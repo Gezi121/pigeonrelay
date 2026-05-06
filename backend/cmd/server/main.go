@@ -27,7 +27,7 @@ func main() {
 	}
 	if cfg.JWTSecret == "" {
 		cfg.JWTSecret = randomHex(32)
-		log.Printf("warn: JWT_SECRET not set, generated random secret: %s", cfg.JWTSecret)
+		log.Printf("warn: JWT_SECRET not set, generated random secret (hidden)")
 	}
 
 	db, err := database.Open(cfg.DBPath)
@@ -124,10 +124,10 @@ func main() {
 		api.PUT("/sub-links/:hash", h.UpdateSubLink)
 		api.DELETE("/sub-links/:hash", h.DeleteSubLink)
 		api.GET("/settings", h.GetSettings)
-		api.PUT("/settings", h.UpdateSettings)
+		api.PUT("/settings", middleware.AdminRequired(), h.UpdateSettings)
 api.GET("/traffic/overview", h.TrafficOverview)
 		api.POST("/cf/verify-token", h.VerifyCFToken)
-		api.PUT("/admin/account", h.UpdateAdminAccount)
+		api.PUT("/admin/account", middleware.AdminRequired(), h.UpdateAdminAccount)
 		api.GET("/admin/users", middleware.AdminRequired(), h.AdminListUsers)
 		api.PUT("/admin/users/:id", middleware.AdminRequired(), h.AdminUpdateUser)
 		api.DELETE("/admin/users/:id", middleware.AdminRequired(), h.AdminDeleteUser)
