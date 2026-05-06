@@ -809,10 +809,10 @@ func (r *Repo) GetAdminUser() (*model.User, error) {
 
 func (r *Repo) UpdateAdminAccount(username, passwordHash string) error {
 	if passwordHash != "" {
-		_, err := r.db.Exec(`UPDATE users SET username=?, password_hash=? WHERE role='admin' LIMIT 1`, username, passwordHash)
+		_, err := r.db.Exec(`UPDATE users SET username=?, password_hash=? WHERE role='admin'`, username, passwordHash)
 		return err
 	}
-	_, err := r.db.Exec(`UPDATE users SET username=? WHERE role='admin' LIMIT 1`, username)
+	_, err := r.db.Exec(`UPDATE users SET username=? WHERE role='admin'`, username)
 	return err
 }
 
