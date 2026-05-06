@@ -458,7 +458,7 @@ func (h *Handler) AdminResetTraffic(c *gin.Context) {
 
 func (h *Handler) GetSettings(c *gin.Context) {
 	keys := []string{"clash_template", "base_domain", "latency_token", "cf_zone_id", "cf_update_minutes"}
-	out := gin.H{"version": "1.0.4"}
+	out := gin.H{"version": "1.0.7"}
 	for _, k := range keys {
 		v, _ := h.Admin.GetSetting(k)
 		out[k] = v

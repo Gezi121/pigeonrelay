@@ -112,6 +112,39 @@ mode: rule
 log-level: info
 external-controller: 127.0.0.1:9090
 
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  default-nameserver:
+    - 119.29.29.29
+    - 223.5.5.5
+  nameserver-policy:
+    "geosite:cn,private,apple":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+  nameserver:
+    - "https://1.1.1.1/dns-query#RULES"
+    - "https://8.8.8.8/dns-query#RULES"
+  proxy-server-nameserver:
+    - 119.29.29.29
+    - 223.5.5.5
+  direct-nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  direct-nameserver-follow-policy: true
+  fake-ip-range: 198.18.0.0/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - "*.arpa"
+    - "time.*.com"
+    - "ntp.*.com"
+    - "+.market.xiaomi.com"
+    - "localhost.ptlogin2.qq.com"
+    - "*.msftncsi.com"
+    - "www.msftconnecttest.com"
+
 # 节点配置
 proxies:
 \${proxies}
@@ -135,9 +168,21 @@ proxy-groups:
 
 # 路由规则
 rules:
-  - GEOIP,LAN,DIRECT
+\${server-direct-rules}
+  - GEOSITE,private,DIRECT
+  - GEOIP,private,DIRECT,no-resolve
+  - RULE-SET,Apple,🎯 全球直连
+  - GEOSITE,CN,DIRECT
   - GEOIP,CN,DIRECT
-  - MATCH,🚀 节点选择`
+  - MATCH,🚀 节点选择
+rule-providers:
+  Apple:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/Providers/Apple.yaml"
+    format: yaml
+    path: ./ruleset/Apple.yaml
+    interval: 86400`
 
 const version = ref('')
 const settingsForm = ref({ clash_template: '', base_domain: '', latency_token: '', cf_api_token: '', cf_zone_id: '', cf_update_minutes: '30' })
