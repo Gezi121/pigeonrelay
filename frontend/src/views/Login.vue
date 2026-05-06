@@ -1,21 +1,35 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center relative overflow-hidden">
-    <!-- Animated background elements -->
-    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-400/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-float" style="animation-delay: -3s"></div>
+  <div class="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-50">
 
-    <form @submit.prevent="login" class="glass-card p-10 w-full max-w-md space-y-6 relative z-10 animate-slide-up">
-      <div class="text-center space-y-2 mb-8">
-        <div class="w-16 h-16 mx-auto bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl shadow-glow flex items-center justify-center mb-6">
+    <!-- Dynamic Geometric Square Background -->
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-50">
+      <!-- 3 floating squares -->
+      <div class="absolute w-32 h-32 border-2 border-primary-400 rounded-lg animate-float-square left-[15%] bottom-[-10%]" style="animation-duration: 25s; animation-delay: 0s;"></div>
+      <div class="absolute w-48 h-48 border border-accent rounded-xl animate-float-square left-[50%] bottom-[-20%]" style="animation-duration: 35s; animation-delay: 5s;"></div>
+      <div class="absolute w-24 h-24 border-[3px] border-indigo-400 rounded-md animate-float-square left-[80%] bottom-[-5%]" style="animation-duration: 20s; animation-delay: 2s;"></div>
+    </div>
+
+    <!-- Soft glowing ambient blobs -->
+    <div class="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-primary-400/20 rounded-full mix-blend-multiply filter blur-[80px] opacity-60 animate-blob"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/20 rounded-full mix-blend-multiply filter blur-[100px] opacity-60 animate-blob" style="animation-delay: 2s; animation-duration: 12s"></div>
+
+    <!-- Form Container -->
+    <!-- The width is adjusted to max-w-sm (slightly narrower) for better proportion and balance -->
+    <form @submit.prevent="login" class="glass-card p-8 sm:p-10 w-[90%] max-w-sm space-y-6 relative z-10 shadow-2xl border border-white/50">
+
+      <!-- Header -->
+      <div class="text-center space-y-3 mb-8 animate-slide-up stagger-1">
+        <div class="w-16 h-16 mx-auto bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl shadow-glow flex items-center justify-center transition-transform duration-500 hover:scale-110 hover:rotate-[5deg]">
           <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
         </div>
-        <h1 class="text-3xl font-bold text-slate-800 tracking-tight">PigeonRelay</h1>
-        <p class="text-sm text-slate-500">订阅链接管理与二次加工平台</p>
+        <h1 class="text-3xl font-extrabold text-slate-800 tracking-tight">PigeonRelay</h1>
+        <p class="text-sm font-medium text-slate-500">订阅链接管理平台</p>
       </div>
 
-      <div class="space-y-4">
+      <!-- Inputs -->
+      <div class="space-y-5 animate-slide-up stagger-2">
         <Input
           v-model="username"
           placeholder="用户名"
@@ -31,20 +45,24 @@
         />
       </div>
 
-      <div v-if="error" class="p-3 bg-danger/10 border border-danger/20 rounded-xl flex items-start gap-2 text-danger animate-fade-in">
+      <!-- Error -->
+      <div v-if="error" class="p-3 bg-danger/10 border border-danger/20 rounded-xl flex items-start gap-2 text-danger animate-fade-in stagger-3">
         <svg class="w-5 h-5 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <span class="text-sm">{{ error }}</span>
       </div>
 
-      <Button
-        type="submit"
-        class="w-full h-12 text-base"
-        :loading="loading"
-      >
-        登录系统
-      </Button>
+      <!-- Submit -->
+      <div class="animate-slide-up stagger-4 pt-2">
+        <Button
+          type="submit"
+          class="w-full h-12 text-base group relative overflow-hidden font-semibold tracking-wide"
+          :loading="loading"
+        >
+          <span class="relative z-10">登录系统</span>
+        </Button>
+      </div>
     </form>
   </div>
 </template>

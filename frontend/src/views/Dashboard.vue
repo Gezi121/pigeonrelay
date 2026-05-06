@@ -1,12 +1,12 @@
 <template>
-  <div class="max-w-6xl mx-auto animate-fade-in">
-    <div class="mb-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-8 animate-slide-up stagger-1">
       <h1 class="text-3xl font-bold text-slate-800 tracking-tight">仪表盘</h1>
       <p class="text-slate-500 mt-2">欢迎回来，以下是您的系统运行状态。<span class="text-xs text-slate-400 ml-2">v{{ version }}</span></p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-      <Card class="hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+      <Card class="animate-slide-up stagger-2 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
         <div class="flex items-center justify-between mb-4">
           <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -22,7 +22,7 @@
         </div>
       </Card>
 
-      <Card class="hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+      <Card class="animate-slide-up stagger-3 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
         <div class="flex items-center justify-between mb-4">
           <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,7 +38,7 @@
         </div>
       </Card>
 
-      <Card class="hover:-translate-y-1 hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
+      <Card class="animate-slide-up stagger-4 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
         <div class="absolute -right-6 -top-6 w-32 h-32 bg-gradient-to-br from-primary-400/20 to-accent/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
         <div class="relative z-10">
           <div class="flex items-center justify-between mb-4">
@@ -69,7 +69,7 @@
       </Card>
     </div>
 
-    <Card>
+    <Card class="animate-slide-up stagger-5 mt-8">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-lg font-bold text-slate-800">快速操作</h2>
       </div>
