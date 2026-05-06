@@ -464,9 +464,9 @@ func (s *SubscriptionService) GenerateV2Ray(hash string) (string, error) {
 		}
 	}
 	if len(links) == 0 {
-		return "base64://", nil
+		return "", nil
 	}
-	return "base64://" + base64.StdEncoding.EncodeToString([]byte(strings.Join(links, "\n"))), nil
+	return base64.StdEncoding.EncodeToString([]byte(strings.Join(links, "\n"))), nil
 }
 
 // nodeToShareLink generates a VLESS/VMess/Trojan/SS/Hy2 share link from proxy data.
