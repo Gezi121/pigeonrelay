@@ -12,20 +12,27 @@ if ! command -v docker &> /dev/null; then
 fi
 
 # 获取用户输入
-read -p "请输入 PigeonRelay 面板地址 (如 http://1.2.3.4:3214): " PIGEONRELAY_URL
+# 如果脚本通过 curl | bash 运行，重定向输入
+if [ -t 0 ]; then
+    INPUT_DEV="/dev/stdin"
+else
+    INPUT_DEV="/dev/tty"
+fi
+
+read -p "请输入 PigeonRelay 面板地址 (如 http://1.2.3.4:3214): " PIGEONRELAY_URL < $INPUT_DEV
 if [ -z "$PIGEONRELAY_URL" ]; then
     echo "[错误] 地址不能为空"
     exit 1
 fi
 
-read -p "请输入 Latency Token: " LATENCY_TOKEN
+read -p "请输入 Latency Token: " LATENCY_TOKEN < $INPUT_DEV
 if [ -z "$LATENCY_TOKEN" ]; then
     echo "[错误] Token 不能为空"
     exit 1
 fi
 
-read -p "请输入客户端所在运营商 (如 移动/电信/联通，可留空): " CLIENT_ISP
-read -p "请输入客户端所在地区 (如 华南/华东/香港，可留空): " CLIENT_REGION
+read -p "请输入客户端所在运营商 (如 移动/电信/联通，可留空): " CLIENT_ISP < $INPUT_DEV
+read -p "请输入客户端所在地区 (如 华南/华东/香港，可留空): " CLIENT_REGION < $INPUT_DEV
 
 echo ""
 echo "正在停止并删除旧的测速容器 (如果存在)..."
