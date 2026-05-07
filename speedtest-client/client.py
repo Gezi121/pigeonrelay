@@ -283,17 +283,18 @@ def phase3_fast_test(top_ips):
 
     tls_candidates = [ip for ip in top_ips if results[ip]["tcp_samples"] and
                       sum(1 for x in results[ip]["tcp_samples"] if x > 0) >= FAST_TRIES // 2]
-    with ThreadPoolExecutor(max_workers=min(TLS_WORKERS, len(tls_candidates))) as pool:
-        futures = {pool.submit(tls_latency, ip): ip for ip in tls_candidates}
-        for future in as_completed(futures):
-            ip = futures[future]
-            tls_time, tls_ok, tstamp = future.result()
-            results[ip]["tls_samples"].append(tls_time)
-            results[ip]["tls_times"].append(tstamp)
-            if tls_ok:
-                results[ip]["tls_ok"] += 1
-            else:
-                results[ip]["tls_fail"] += 1
+    if tls_candidates:
+        with ThreadPoolExecutor(max_workers=min(TLS_WORKERS, len(tls_candidates))) as pool:
+            futures = {pool.submit(tls_latency, ip): ip for ip in tls_candidates}
+            for future in as_completed(futures):
+                ip = futures[future]
+                tls_time, tls_ok, tstamp = future.result()
+                results[ip]["tls_samples"].append(tls_time)
+                results[ip]["tls_times"].append(tstamp)
+                if tls_ok:
+                    results[ip]["tls_ok"] += 1
+                else:
+                    results[ip]["tls_fail"] += 1
 
     return results
 
