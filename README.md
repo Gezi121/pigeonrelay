@@ -144,6 +144,15 @@ docker compose up -d
 
 ### 第七步：(可选) 部署测速客户端
 
+**一键部署脚本：**
+
+```bash
+# 在你要部署客户端的机器上执行（需安装好 Docker）
+curl -sSL https://raw.githubusercontent.com/Gezi121/pigeonrelay/main/speedtest-client/deploy.sh | bash
+```
+
+**或者手动部署：**
+
 ```bash
 docker run -d --name speedtest --network host --restart unless-stopped \
   -e PIGEONRELAY_URL=http://<VPS_IP>:3214 \
